@@ -1,13 +1,17 @@
+#!/usr/bin/python3
+
+# Valeria Mora, Sofía Villalta, Saúl Calderón
+# Proyecto Python
+# Mascota virtual
+
 import pygame
 from pygame import mixer
 import sys
-from pygame.locals import QUIT
-import time
 from datetime import datetime
 
 pygame.init()
 
-#Se crea la pantalla de fondo
+# Se crea la pantalla de fondo
 pantalla = pygame.display.set_mode((1280, 700))
 
 pygame.display.set_caption("Tomatoe game")
@@ -22,7 +26,7 @@ vida = 1000
 contadorComer = 0
 contadorBanhar = 0
 contadorJugar = 0
-#Reloj del juego
+# Reloj del juego
 mainclock = pygame.time.Clock()
 global tick_count
 tick_count = 0
@@ -53,7 +57,7 @@ class Boton():
 
 # Función para alimentar a la mascota
 def comer(comida):
-    #VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
+    # VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
     global contadorComer
     global vida
     contadorComer += 1
@@ -96,7 +100,7 @@ def comer(comida):
     ]
 
     while True:
-        #Posición del mouse
+        # Posición del mouse
         mouse_pos = pygame.mouse.get_pos()
         pantalla.fill((249, 171, 104))
         tomate()
@@ -107,7 +111,7 @@ def comer(comida):
         boton_regresar = Boton(devolver, pos=(110, 90))
         boton_regresar.update(pantalla)
 
-        #Icono de refri
+        # Icono de refri
         refri = pygame.image.load("refri.png")
         refri.set_colorkey([0, 0, 0])
         boton_refri = Boton(refri, pos=(110, 550))
@@ -167,9 +171,9 @@ def comer(comida):
 
             # Si la comida se coloca en la boca del tomate, este la come
             if comida_x + comida_w > tomate_x + 20 and \
-                   comida_x < tomate_x + tomate_w/2 -90 and \
-                   comida_y + comida_h > tomate_y -30 and \
-                   comida_y < tomate_y + tomate_h/2 -80:
+               comida_x < tomate_x + tomate_w/2 - 90 and \
+               comida_y + comida_h > tomate_y - 30 and \
+               comida_y < tomate_y + tomate_h/2 - 80:
 
                 # Coordenadas para que la comida
                 # desaparezca de la pantalla
@@ -195,7 +199,7 @@ def comer(comida):
 # Función para el menú de comida
 def menu_comida():
     while True:
-        #Posición del mouse
+        # Posición del mouse
         mouse_pos = pygame.mouse.get_pos()
         pantalla.fill((249, 171, 104))
         fondo = pygame.image.load('fondo1.jpg').convert()
@@ -224,7 +228,7 @@ def menu_comida():
         boton_huevito = Boton(huevito, pos=(800, 260))
         boton_huevito.update(pantalla)
 
-        #Queque
+        # Queque
         queque = pygame.image.load('pastel.png').convert()
         queque.set_colorkey([0, 0, 0])
         boton_queque = Boton(queque, pos=(1080, 265))
@@ -236,19 +240,19 @@ def menu_comida():
         boton_pizza = Boton(pizza, pos=(225, 450))
         boton_pizza.update(pantalla)
 
-        #Palomitas
+        # Palomitas
         palomitas = pygame.image.load('palomitas.png').convert()
         palomitas.set_colorkey([0, 0, 0])
         boton_palomitas = Boton(palomitas, pos=(500, 450))
         boton_palomitas.update(pantalla)
 
-        #Sushi
+        # Sushi
         sushi = pygame.image.load('sushi.png').convert()
         sushi.set_colorkey([0, 0, 0])
         boton_sushi = Boton(sushi, pos=(800, 460))
         boton_sushi.update(pantalla)
 
-        #Hamburguesa
+        # Hamburguesa
         hamburguesa = pygame.image.load('hamburguesa.png').convert()
         hamburguesa.set_colorkey([0, 0, 0])
         boton_hamburguesa = Boton(hamburguesa, pos=(1080, 460))
@@ -313,7 +317,7 @@ def menu_comida():
 
 # Función para asear a la mascota
 def banar():
-    #VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
+    # VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
     global contadorBanhar
     global vida
     contadorBanhar += 1
@@ -323,7 +327,7 @@ def banar():
     global tick_count
     score = 0
     while True:
-        #Posición del mouse
+        # Posición del mouse
         mouse_pos = pygame.mouse.get_pos()
 
         pantalla.fill((249, 171, 104))
@@ -334,7 +338,7 @@ def banar():
         boton_regresar = Boton(devolver, pos=(110, 90))
         boton_regresar.update(pantalla)
 
-        #Se definen tiempos de baño
+        # Se definen tiempos de baño
 
         tick_count += 1 / 60
         if tick_count >= 1:
@@ -371,13 +375,12 @@ def banar():
                 if boton_regresar.checkForInput(mouse_pos):
                     main()
 
-        #tomate()
         pygame.display.update()
 
 
 # Función para jugar con la mascota
 def jugar():
-    #VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
+    # VARIABLES GLOBALES PARA EL CONTADOR DE VIDA
     global contadorJugar
     global vida
     contadorJugar += 1
@@ -387,7 +390,7 @@ def jugar():
     score = 0
 
     while True:
-        #Posición del mouse
+        # Posición del mouse
         mouse_pos = pygame.mouse.get_pos()
 
         pantalla.fill((249, 171, 104))
@@ -398,13 +401,12 @@ def jugar():
         boton_regresar = Boton(devolver, pos=(110, 90))
         boton_regresar.update(pantalla)
 
-        #Se definen tiempos de baño
-
+        # Se definen tiempos de baño
         tick_count += 1 / 60
         if tick_count >= 0.2:
             tick_count = 0
             score += 0.5
-        #Secuencia de imagenes para jugar
+        # Secuencia de imagenes para jugar
         if score == 0.5:
             background = pygame.image.load('tomate1.gif').convert()
             background.set_colorkey([0, 0, 0])
@@ -420,7 +422,6 @@ def jugar():
             backgroundimgX = 0
             backgroundimgY = 0
             pantalla.blit(background, (backgroundimgX, backgroundimgY))
-            
 
         if score == 1.5:
             background = pygame.image.load('tomate3.gif').convert()
@@ -436,7 +437,6 @@ def jugar():
             backgroundimgX = 0
             backgroundimgY = 0
             pantalla.blit(background, (backgroundimgX, backgroundimgY))
-            
         if score == 2.5:
             background = pygame.image.load('tomate5.gif').convert()
             background.set_colorkey([0, 0, 0])
@@ -457,14 +457,12 @@ def jugar():
             backgroundimgX = 0
             backgroundimgY = 0
             pantalla.blit(background, (backgroundimgX, backgroundimgY))
-          
         if score == 4:
             background = pygame.image.load('tomate8.gif').convert()
             background.set_colorkey([0, 0, 0])
             backgroundimgX = 0
             backgroundimgY = 0
             pantalla.blit(background, (backgroundimgX, backgroundimgY))
-
         if score == 4.5:
             background = pygame.image.load('tomate9.gif').convert()
             background.set_colorkey([0, 0, 0])
@@ -479,7 +477,6 @@ def jugar():
             backgroundimgX = 0
             backgroundimgY = 0
             pantalla.blit(background, (backgroundimgX, backgroundimgY))
-            
         if score == 5.5:
             background = pygame.image.load('tomate11.gif').convert()
             background.set_colorkey([0, 0, 0])
@@ -511,7 +508,6 @@ def jugar():
                 if boton_regresar.checkForInput(mouse_pos):
                     main()
 
-        #tomate()
         pygame.display.update()
 
 
@@ -562,7 +558,7 @@ def barra_de_corazones():
         V_corazonesX = 400
         V_corazonesY = 61
         pantalla.blit(V_corazones, (V_corazonesX, V_corazonesY))
-    if (vida <=700 and vida > 500):
+    if (vida <= 700 and vida > 500):
         IV_corazones = pygame.image.load('Vida4.png').convert()
         IV_corazones.set_colorkey([0, 0, 0])
         IV_corazonesX = 400
@@ -586,17 +582,55 @@ def barra_de_corazones():
         I_corazonesX = 400
         I_corazonesY = 61
         pantalla.blit(I_corazones, (I_corazonesX, I_corazonesY))
-      
+
+
 def tomate_muerto():
     global vida
+
     tomateimg = pygame.image.load('ripTomate.jpg').convert()
     tomateimg.set_colorkey([0, 0, 0])
     tomateimgX = 0
     tomateimgY = 0
     pantalla.blit(tomateimg, (tomateimgX, tomateimgY))
-    mixer.music.stop()
-    muerte = mixer.Sound('mixkit-sad-game-over-trombone-471.wav')
-    muerte.play()
+    
+    # Traer icono de devolver
+    devolver = pygame.image.load('volver.png').convert()
+    devolver.set_colorkey([255, 255, 255])
+    boton_regresar = Boton(devolver, pos=(110, 90))
+    boton_regresar.update(pantalla)
+  
+    
+    while True:
+        # Posición del mouse
+        mouse_pos = pygame.mouse.get_pos()
+        
+        mixer.music.stop()
+        muerte = mixer.Sound('mixkit-sad-game-over-trombone-471.wav')
+        muerte.play()
+        
+        # Se reinician toodos los contadores
+        global contadorComer
+        global contadorBanhar
+        global contadorJugar
+        global vida
+        vida = 1000
+        contadorComer = 0
+        contadorBanhar = 0
+        contadorJugar = 0
+        global tick_count
+        tick_count = 0
+        global score
+        score = 0
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if boton_regresar.checkForInput(mouse_pos):
+                    main()
+
+        pygame.display.update()
 
 
 # Función principal
@@ -623,15 +657,14 @@ def main():
     salida = pygame.image.load('Salida.png').convert()
 
     # Loop del juego
-    running = True
     hora_inicio = datetime.now()
-    while running:
+    while True:
         tiempo = (datetime.now() - hora_inicio).total_seconds()
         while (tiempo > 5.3):
             tiempo -= 5.3
         print(tiempo)
         pantalla.fill((249, 171, 104))
-        #Posición del mouse
+        # Posición del mouse
         mouse_pos = pygame.mouse.get_pos()
         # Se definen los botones del menú principal
         boton_comida = Boton(comida, pos=(1075, 150))
@@ -644,7 +677,8 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                sys.exit()
             # Condición que se activa si mouse presiona
             # cualquiera de los botones definidos
             if event.type == pygame.MOUSEBUTTONDOWN:
